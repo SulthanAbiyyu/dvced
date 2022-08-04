@@ -35,3 +35,4 @@ train:
 evaluate:
   reports_dir: reports
   metrics_file: "metrics.json"
+  confusion_matrix_file: "confusion_matrix.png"
