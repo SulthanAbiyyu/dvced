@@ -3,3 +3,4 @@ models
 
 *.pyc
 *.pyo
+/tes.txt
