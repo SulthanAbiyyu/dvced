@@ -2,9 +2,11 @@ import yaml
 import argparse
 import pandas as pd
 
-from load_data import load_data
 from sklearn.model_selection import train_test_split
 
+def load_data(config):
+    data = pd.read_csv(config['data_load']['raw_data'], delimiter=";")
+    return data
 
 def split_data(config_path):
     with open(config_path, 'r') as f:
