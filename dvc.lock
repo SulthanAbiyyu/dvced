@@ -1,0 +1,133 @@
+schema: '2.0'
+stages:
+  dataset:
+    cmd: python .\src\stages\dataset.py --config params.yaml
+    deps:
+    - path: .\src\stages\dataset.py
+      md5: 61c4521cc06d5de07ff914be5ac450a5
+      size: 977
+    params:
+      params.yaml:
+        base:
+          random_state: 42
+          target_column: class
+        data_load:
+          raw_data: data/raw/diabetes_data.csv
+        data_split:
+          test_size: 0.2
+          output_train_path: data/processed/train.csv
+          output_test_path: data/processed/test.csv
+    outs:
+    - path: data/processed/test.csv
+      md5: d64bfea0224f54df741a16cc2231c281
+      size: 4341
+    - path: data/processed/train.csv
+      md5: 460c272720de5cfd8736038d052008b7
+      size: 16713
+  featurize:
+    cmd: python .\src\stages\featurize.py --config params.yaml
+    deps:
+    - path: .\src\stages\featurize.py
+      md5: 8e1364a223f356d2fde647782f7dccf9
+      size: 1616
+    - path: data/processed/test.csv
+      md5: d64bfea0224f54df741a16cc2231c281
+      size: 4341
+    - path: data/processed/train.csv
+      md5: 460c272720de5cfd8736038d052008b7
+      size: 16713
+    params:
+      params.yaml:
+        data_split:
+          test_size: 0.2
+          output_train_path: data/processed/train.csv
+          output_test_path: data/processed/test.csv
+        featurize:
+          output_train_features_path: data/processed/train_features.csv
+          output_test_features_path: data/processed/test_features.csv
+    outs:
+    - path: data/processed/test_features.csv
+      md5: bc7949726d655c438f23631a1f03d74b
+      size: 5613
+    - path: data/processed/train_features.csv
+      md5: 58230896be00e40388e55c8f30dc160d
+      size: 21647
+  train:
+    cmd: python .\src\stages\train.py --config params.yaml
+    deps:
+    - path: .\src\stages\train.py
+      md5: 442c7452649e7f5dd4bafd96157676a1
+      size: 1148
+    - path: data/processed/test_features.csv
+      md5: bc7949726d655c438f23631a1f03d74b
+      size: 5613
+    - path: data/processed/train_features.csv
+      md5: 58230896be00e40388e55c8f30dc160d
+      size: 21647
+    params:
+      params.yaml:
+        base:
+          random_state: 42
+          target_column: class
+        featurize:
+          output_train_features_path: data/processed/train_features.csv
+          output_test_features_path: data/processed/test_features.csv
+        train:
+          estimator_name: xgboost
+          model_path: models/model.joblib
+          estimators:
+            xgboost:
+              params:
+                eval_metric: logloss
+                n_estimators: 10
+                max_depth: 3
+                learning_rate: 0.1
+                objective: binary:logistic
+                seed: 42
+    outs:
+    - path: models/model.joblib
+      md5: 34e827f71b2e35834ca02510c383e26c
+      size: 16753
+  evaluate:
+    cmd: python .\src\stages\evaluate.py --config params.yaml
+    deps:
+    - path: .\src\stages\evaluate.py
+      md5: 5b362106d6d226a6250fb879ec1b0d71
+      size: 1505
+    - path: data/processed/test_features.csv
+      md5: bc7949726d655c438f23631a1f03d74b
+      size: 5613
+    - path: models/model.joblib
+      md5: 34e827f71b2e35834ca02510c383e26c
+      size: 16753
+    params:
+      params.yaml:
+        base:
+          random_state: 42
+          target_column: class
+        evaluate:
+          reports_dir: reports
+          metrics_file: metrics.json
+          confusion_matrix_file: confusion_matrix.png
+        featurize:
+          output_train_features_path: data/processed/train_features.csv
+          output_test_features_path: data/processed/test_features.csv
+        train:
+          estimator_name: xgboost
+          model_path: models/model.joblib
+          estimators:
+            xgboost:
+              params:
+                eval_metric: logloss
+                n_estimators: 10
+                max_depth: 3
+                learning_rate: 0.1
+                objective: binary:logistic
+                seed: 42
+    outs:
+    - path: reports/confusion_matrix.png
+      md5: 5b0e7baf779afaa48b7ee93b4befd477
+      size: 17234
+    - path: reports/metrics.json
+      md5: 809e31da474464b1da49eb65a1556c95
+      size: 716
