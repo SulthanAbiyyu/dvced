@@ -1,5 +1,7 @@
 models
 data/processed
 
+dvc_plots
+
 *.pyc
 *.pyo
