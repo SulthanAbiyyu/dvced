@@ -79,15 +79,15 @@ stages:
             xgboost:
               params:
                 eval_metric: logloss
-                n_estimators: 10
+                n_estimators: 20
                 max_depth: 10
                 learning_rate: 0.1
                 objective: binary:logistic
                 seed: 42
     outs:
     - path: models/model.joblib
-      md5: defb01e3540c2c90089cce9bcb7742c0
-      size: 23555
+      md5: 83daf6ef233e7218e9dfecfd237fc359
+      size: 43104
   evaluate:
     cmd: python .\src\stages\evaluate.py --config params.yaml
     deps:
