@@ -28,10 +28,7 @@ def evaluate(config_path):
     cm = confusion_matrix(y, y_pred)
 
     report = {
-        "f1": f1,
-        "confusion_matrix": cm.tolist(),
-        "actual": y.tolist(),
-        "predicted": y_pred.tolist()
+        "f1": f1
     }
 
     reports_folder = config["evaluate"]["reports_dir"]
