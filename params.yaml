@@ -28,7 +28,7 @@ train:
         eval_metric: logloss
         n_estimators: 20
         max_depth: 10
-        learning_rate: 0.1
+        learning_rate: 0.01
         objective: binary:logistic
         seed: 42
 
