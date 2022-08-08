@@ -48,7 +48,7 @@ stages:
       - featurize
       - base
       - train
-    outs:
+    plots:
       - reports/confusion_matrix.png
     metrics:
       - reports/metrics.json:
