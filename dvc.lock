@@ -92,8 +92,8 @@ stages:
     cmd: python .\src\stages\evaluate.py --config params.yaml
     deps:
     - path: .\src\stages\evaluate.py
-      md5: 81b8e0f40c945d1ad561badc3d908775
-      size: 1396
+      md5: 8009e1c41ea7db01a0a4505134bafa6b
+      size: 1379
     - path: data/processed/test_features.csv
       md5: bc7949726d655c438f23631a1f03d74b
       size: 5613
@@ -125,9 +125,9 @@ stages:
                 objective: binary:logistic
                 seed: 42
     outs:
+    - path: metrics.json
+      md5: 2c88fac1bb8f709bea9ae4205b04dfe8
+      size: 26
     - path: reports/confusion_matrix.png
       md5: 4ce96f7884a1871f77a338281aad7733
       size: 17258
-    - path: reports/metrics.json
-      md5: 2c88fac1bb8f709bea9ae4205b04dfe8
-      size: 26

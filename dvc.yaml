@@ -51,5 +51,5 @@ stages:
     plots:
       - reports/confusion_matrix.png
     metrics:
-      - reports/metrics.json:
+      - metrics.json:
           cache: false

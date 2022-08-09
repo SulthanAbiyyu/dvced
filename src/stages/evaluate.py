@@ -32,7 +32,7 @@ def evaluate(config_path):
     }
 
     reports_folder = config["evaluate"]["reports_dir"]
-    metrics_path = f"{reports_folder}/{config['evaluate']['metrics_file']}"
+    metrics_path = f"{config['evaluate']['metrics_file']}"
 
     json.dump(
         obj=report,
