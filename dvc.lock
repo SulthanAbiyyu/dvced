@@ -81,13 +81,13 @@ stages:
                 eval_metric: logloss
                 n_estimators: 20
                 max_depth: 10
-                learning_rate: 0.3
+                learning_rate: 0.5
                 objective: binary:logistic
                 seed: 42
     outs:
     - path: models/model.joblib
-      md5: ec66530570cc458fe1238679224573b5
-      size: 38684
+      md5: 3e5c1dd4a2b191353dd5cb6a93e7e90f
+      size: 33552
   evaluate:
     cmd: python .\src\stages\evaluate.py --config params.yaml
     deps:
@@ -98,8 +98,8 @@ stages:
       md5: bc7949726d655c438f23631a1f03d74b
       size: 5613
     - path: models/model.joblib
-      md5: ec66530570cc458fe1238679224573b5
-      size: 38684
+      md5: 3e5c1dd4a2b191353dd5cb6a93e7e90f
+      size: 33552
     params:
       params.yaml:
         base:
@@ -121,7 +121,7 @@ stages:
                 eval_metric: logloss
                 n_estimators: 20
                 max_depth: 10
-                learning_rate: 0.3
+                learning_rate: 0.5
                 objective: binary:logistic
                 seed: 42
     outs:
