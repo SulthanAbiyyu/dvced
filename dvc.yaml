@@ -48,8 +48,8 @@ stages:
       - featurize
       - base
       - train
-    plots:
-      - reports/confusion_matrix.png
     metrics:
       - evaluation.json:
           cache: false
+    plots:
+      - reports/confusion_matrix.png
