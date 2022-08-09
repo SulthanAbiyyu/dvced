@@ -49,7 +49,7 @@ stages:
       - base
       - train
     metrics:
-      - evaluation.json:
-          cache: false
+    - evaluation.json:
+        cache: false
     plots:
-      - reports/confusion_matrix.png
+    - reports/confusion_matrix.png
