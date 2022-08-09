@@ -4,12 +4,14 @@ import json
 import argparse
 import pandas as pd
 
+from dvclive import Live
 from src.report.confusion_matrix import plot_confusion_matrix
 from sklearn.metrics import confusion_matrix, f1_score
 
 
 def evaluate(config_path):
 
+    live = Live("evaluation")
     with open(config_path) as f:
         config = yaml.safe_load(f)
 
@@ -27,17 +29,18 @@ def evaluate(config_path):
     f1 = f1_score(y, y_pred, average="macro")
     cm = confusion_matrix(y, y_pred)
 
-    report = {
-        "f1": f1
-    }
+    live.log("f1", f1)
+    # report = {
+    #     "f1": f1
+    # }
 
     reports_folder = config["evaluate"]["reports_dir"]
     metrics_path = f"{config['evaluate']['metrics_file']}"
 
-    json.dump(
-        obj=report,
-        fp=open(metrics_path, "w"),
-    )
+    # json.dump(
+    #     obj=report,
+    #     fp=open(metrics_path, "w"),
+    # )
 
     plt = plot_confusion_matrix(cm, target_names=["0", "1"], normalize=False)
     plt.savefig(
