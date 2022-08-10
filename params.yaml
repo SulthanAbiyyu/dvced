@@ -26,8 +26,8 @@ train:
     xgboost:
       params:
         eval_metric: logloss
-        n_estimators: 30
-        max_depth: 10
+        n_estimators: 20
+        max_depth: 20
         learning_rate: 0.3
         objective: binary:logistic
         seed: 42
