@@ -4,7 +4,6 @@ import joblib
 import pandas as pd
 from xgboost import XGBClassifier
 
-
 def get_estimator():
     return {
         "xgboost": XGBClassifier
@@ -34,6 +33,7 @@ def train(config_path):
     model_path = config["train"]["model_path"]
     joblib.dump(estimator, model_path)
 
+    return estimator_name, params
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

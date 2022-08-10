@@ -56,8 +56,8 @@ stages:
     cmd: python .\src\stages\train.py --config params.yaml
     deps:
     - path: .\src\stages\train.py
-      md5: 442c7452649e7f5dd4bafd96157676a1
-      size: 1148
+      md5: 6229a6c47ab68bccdfa020c62c8cd785
+      size: 1376
     - path: data/processed/test_features.csv
       md5: bc7949726d655c438f23631a1f03d74b
       size: 5613
@@ -81,25 +81,25 @@ stages:
                 eval_metric: logloss
                 n_estimators: 20
                 max_depth: 10
-                learning_rate: 0.5
+                learning_rate: 2.0
                 objective: binary:logistic
                 seed: 42
     outs:
     - path: models/model.joblib
-      md5: 3e5c1dd4a2b191353dd5cb6a93e7e90f
-      size: 33552
+      md5: 282f8fed7c20e3a6dd5e399d02bc3fde
+      size: 24757
   evaluate:
     cmd: python .\src\stages\evaluate.py --config params.yaml
     deps:
     - path: .\src\stages\evaluate.py
-      md5: 648940ae3463ab4b223bbd1880c1d197
-      size: 1527
+      md5: 8bde06c9c48489fc54eba8166d936af7
+      size: 1534
     - path: data/processed/test_features.csv
       md5: bc7949726d655c438f23631a1f03d74b
       size: 5613
     - path: models/model.joblib
-      md5: 3e5c1dd4a2b191353dd5cb6a93e7e90f
-      size: 33552
+      md5: 282f8fed7c20e3a6dd5e399d02bc3fde
+      size: 24757
     params:
       params.yaml:
         base:
@@ -121,13 +121,13 @@ stages:
                 eval_metric: logloss
                 n_estimators: 20
                 max_depth: 10
-                learning_rate: 0.5
+                learning_rate: 2.0
                 objective: binary:logistic
                 seed: 42
     outs:
-    - path: evaluation.json
-      md5: 80b9cdc693b98161f38acd247c907dbe
-      size: 34
+    - path: metrics.json
+      md5: 80ac8fd6845eb003118bc6d4dc6a05a0
+      size: 25
     - path: reports/confusion_matrix.png
-      md5: 8ebe28fbf694bb5d4cbe618558796560
-      size: 17292
+      md5: 23cddff0c900eab616861514ce2abe27
+      size: 17119
