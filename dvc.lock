@@ -135,8 +135,8 @@ stages:
     cmd: python .\src\stages\train_eval.py --config params.yaml
     deps:
     - path: .\src\stages\train_eval.py
-      md5: 3095c4cde16ed0ee900e52988f62380b
-      size: 689
+      md5: 8cccc009c5ba9f2c70ce41257c83cfef
+      size: 824
     - path: data/processed/test_features.csv
       md5: bc7949726d655c438f23631a1f03d74b
       size: 5613
@@ -147,8 +147,8 @@ stages:
       md5: 58230896be00e40388e55c8f30dc160d
       size: 21647
     - path: models/model.joblib
-      md5: 282f8fed7c20e3a6dd5e399d02bc3fde
-      size: 24757
+      md5: 2b29db15a025c015f5995b3592359a93
+      size: 50208
     params:
       params.yaml:
         base:
@@ -168,15 +168,15 @@ stages:
             xgboost:
               params:
                 eval_metric: logloss
-                n_estimators: 20
+                n_estimators: 30
                 max_depth: 10
-                learning_rate: 2.0
+                learning_rate: 0.3
                 objective: binary:logistic
                 seed: 42
     outs:
     - path: metrics.json
-      md5: 80ac8fd6845eb003118bc6d4dc6a05a0
-      size: 25
+      md5: 2f10f935a3bd4cdf956db4893bdab93d
+      size: 26
     - path: reports/confusion_matrix.png
-      md5: 23cddff0c900eab616861514ce2abe27
-      size: 17119
+      md5: ef701dd21a7b1819e87667258a4d5e9b
+      size: 17311
