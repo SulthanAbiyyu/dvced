@@ -131,3 +131,52 @@ stages:
     - path: reports/confusion_matrix.png
       md5: 23cddff0c900eab616861514ce2abe27
       size: 17119
+  train_eval:
+    cmd: python .\src\stages\train_eval.py --config params.yaml
+    deps:
+    - path: .\src\stages\train_eval.py
+      md5: 3095c4cde16ed0ee900e52988f62380b
+      size: 689
+    - path: data/processed/test_features.csv
+      md5: bc7949726d655c438f23631a1f03d74b
+      size: 5613
+    - path: data/processed/test_features.csv
+      md5: bc7949726d655c438f23631a1f03d74b
+      size: 5613
+    - path: data/processed/train_features.csv
+      md5: 58230896be00e40388e55c8f30dc160d
+      size: 21647
+    - path: models/model.joblib
+      md5: 282f8fed7c20e3a6dd5e399d02bc3fde
+      size: 24757
+    params:
+      params.yaml:
+        base:
+          random_state: 42
+          target_column: class
+        evaluate:
+          reports_dir: reports
+          metrics_file: metrics.json
+          confusion_matrix_file: confusion_matrix.png
+        featurize:
+          output_train_features_path: data/processed/train_features.csv
+          output_test_features_path: data/processed/test_features.csv
+        train:
+          estimator_name: xgboost
+          model_path: models/model.joblib
+          estimators:
+            xgboost:
+              params:
+                eval_metric: logloss
+                n_estimators: 20
+                max_depth: 10
+                learning_rate: 2.0
+                objective: binary:logistic
+                seed: 42
+    outs:
+    - path: metrics.json
+      md5: 80ac8fd6845eb003118bc6d4dc6a05a0
+      size: 25
+    - path: reports/confusion_matrix.png
+      md5: 23cddff0c900eab616861514ce2abe27
+      size: 17119

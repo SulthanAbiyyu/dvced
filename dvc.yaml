@@ -36,8 +36,6 @@ stages:
       - featurize
       - base
       - evaluate
-    outs:
-      - models/model.joblib
     metrics:
       - metrics.json:
           cache: false

@@ -17,6 +17,6 @@ if __name__ == "__main__":
         for param, value in params.items():
             mlflow.log_param(param, value)
         
-        mlflow.log_metric("f1", f1)
+        mlflow.log_metric("f1_score", f1)
         mlflow.log_artifact("reports/confusion_matrix.png")
         print("Training and evaluation complete")
