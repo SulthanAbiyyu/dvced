@@ -147,8 +147,8 @@ stages:
       md5: 58230896be00e40388e55c8f30dc160d
       size: 21647
     - path: models/model.joblib
-      md5: e6ff8ba1b787890330e0a554c818dc8d
-      size: 38684
+      md5: 10e79c20af45b2dd38aae3bc8cfe28ce
+      size: 202937
     params:
       params.yaml:
         base:
@@ -168,15 +168,15 @@ stages:
             xgboost:
               params:
                 eval_metric: logloss
-                n_estimators: 20
+                n_estimators: 200
                 max_depth: 20
                 learning_rate: 0.3
                 objective: binary:logistic
                 seed: 42
     outs:
     - path: metrics.json
-      md5: 909d9699caeb65102ac64c53113bd526
-      size: 26
+      md5: 80ac8fd6845eb003118bc6d4dc6a05a0
+      size: 25
     - path: reports/confusion_matrix.png
-      md5: 8ebe28fbf694bb5d4cbe618558796560
-      size: 17292
+      md5: 23cddff0c900eab616861514ce2abe27
+      size: 17119
